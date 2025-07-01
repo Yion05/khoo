@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PD Leisure Homestay - Beachfront Paradise</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="bubbles.css">
+    <link rel="stylesheet" href="effects.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #2a6b7a;
+            --secondary: #f5e6c8;
+            --accent: #e67e22;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --sand: #e6d3a7;
+            --ocean: #3498db;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 10px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: all 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            animation: fadeIn 2s ease;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 14px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.4);
+            animation: fadeIn 2.5s ease;
+        }
+        
+        .btn:hover {
+            background-color: #d35400;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(230, 126, 34, 0.6);
+        }
+        
+        /* Rooms Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--primary);
+        }
+        
+        .section-title h2 {
+            font-size: 2.8rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 15px auto 0;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .rooms {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+        
+        .room-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .room-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .room-img {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .room-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .room-card:hover .room-img img {
+            transform: scale(1.05);
+        }
+        
+        .room-content {
+            padding: 25px;
+        }
+        
+        .room-content h3 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .room-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            color: #666;
+        }
+        
+        .room-info i {
+            margin-right: 5px;
+            color: var(--accent);
+        }
+        
+        .room-price {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        .room-price span {
+            font-size: 1rem;
+            font-weight: normal;
+            color: #777;
+        }
+        
+        .room-content p {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 30px 0;
+        }
+        
+        .modal-content {
+            background-color: white;
+            max-width: 900px;
+            margin: 30px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            animation: modalOpen 0.6s ease;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+        }
+        
+        @keyframes modalOpen {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            padding: 25px;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            font-size: 2rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            padding: 5px;
+        }
+        
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+        
+        .modal-body {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .modal-img {
+            border-radius: 8px;
+            overflow: hidden;
+            height: 350px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .modal-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .modal-details h4 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .modal-details h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .modal-details p {
+            margin-bottom: 25px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature i {
+            color: var(--accent);
+            margin-right: 12px;
+            font-size: 1.3rem;
+            width: 25px;
+            text-align: center;
+        }
+
+        /* Photo Gallery Section */
+        .photo-gallery {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 250px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 15px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+        
+        .gallery-caption h4 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .gallery-caption p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Amenities Section */
+        .amenities {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+        
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+        
+        .amenity-item {
+            background-color: white;
+            padding: 40px 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.4s;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .amenity-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        .amenity-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            transition: all 0.3s;
+        }
+        
+        .amenity-item:hover .amenity-icon {
+            transform: scale(1.1);
+            color: var(--accent);
+        }
+        
+        .amenity-item h4 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .amenity-item p {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 0 40px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h4 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--sand);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .footer-column p {
+            margin-bottom: 20px;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.8;
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .contact-info i {
+            margin-right: 12px;
+            margin-top: 5px;
+            color: var(--sand);
+            font-size: 1.1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .footer-form input[type="email"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .modal-body {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-img {
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.4rem;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 0;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .logo {
+                margin-bottom: 10px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                height: 80vh;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .room-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .amenities-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://www.creativefabrica.com/wp-content/uploads/2020/03/09/Beach-logo-Graphics-3535417-1.jpg" alt="PD Leisure Homestay Logo" class="logo-img">
+                <h1 class="logo-text">PD Leisure Homestay</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#rooms">HOMESTAY</a></li>
+                    <li><a href="#gallery">PHOTOS</a></li>
+                    <li><a href="#amenities">FACILITIES</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>PD Khoo Leisure Homestay</h2>
+            <p>Your perfect beachfront getaway in Port Dickson</p>
+            <a href="#rooms" class="btn pulse">Explore Rooms</a>
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section id="rooms" class="rooms">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Accommodations</h2>
+                <p>Experience comfort and luxury in our beautifully designed rooms</p>
+            </div>
+            <div class="room-grid">
+                <!-- Room 1 -->
+                <div class="room-card glow-on-hover">
+                    <div class="room-img">
+                        <img src="https://lh3.googleusercontent.com/p/AF1QipNuvJmHVuw6OaceGh5di5d-S-uPcU2OyT0uZfe9=s1360-w1360-h1020-rw" alt="PD Leisure Homestay">
+                    </div>
+                    <div class="room-content">
+                        <h3>PD Leisure</h3>
+                        <div class="room-info">
+                            <span><i class="fas fa-user-friends"></i> 9 Adults</span>
+                            <span><i class="fas fa-expand-arrows-alt"></i> 45m²</span>
+                        </div>
+                        <div class="room-price">RM1 <span>/night</span></div>
+                        <p>1.4 KM to the Beach Tanjung Gemok</p>
+                        <button class="btn view-details" data-room="1">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Room 2 -->
+                <div class="room-card glow-on-hover">
+                    <div class="room-img">
+                        <img src="https://lh3.googleusercontent.com/p/AF1QipO6sCbpkiejHyd89eo3qhfVK2wyu4PNCPcJ3jrm=w408-h306-k-no" alt="PD Leisure Tmn NLFCS">
+                    </div>
+                    <div class="room-content">
+                        <h3>Pd Leisure Tmn NLFCS</h3>
+                        <div class="room-info">
+                            <span><i class="fas fa-user-friends"></i> 7 Adults</span>
+                            <span><i class="fas fa-expand-arrows-alt"></i> 65m²</span>
+                        </div>
+                        <div class="room-price">RM380 <span>/night</span></div>
+                        <p>This homestay is clean, perfect for families.</p>
+                        <button class="btn view-details" data-room="2">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Room 3 -->
+                <div class="room-card glow-on-hover">
+                    <div class="room-img">
+                        <img src="https://scontent.fmkz1-1.fna.fbcdn.net/v/t39.30808-6/494209025_1260303519428384_779238808066989288_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=sYlFL5NsSMgQ7kNvwFogKG-&_nc_oc=Adlx62cH4pUGBGDFUCS5tINJUxTrg1oBzbW01lB37FW3zzjjv6AGRg0k4Hf1NCEprBU&_nc_zt=23&_nc_ht=scontent.fmkz1-1.fna&_nc_gid=Lr7M4IDmQ-k43UddarZrow&oh=00_AfOv4-eGw-fykOLysKzuActVeVk0t2RQOsjIdb0UgNQ3WA&oe=6866DDE9" alt="No name">
+                    </div>
+                    <div class="room-content">
+                        <h3>No name</h3>
+                        <div class="room-info">
+                            <span><i class="fas fa-user-friends"></i> 8 Adults</span>
+                            <span><i class="fas fa-expand-arrows-alt"></i> 120m²</span>
+                        </div>
+                        <div class="room-price">RM2.5 <span>/night</span></div>
+                        <p>still editing lol.</p>
+                        <button class="btn view-details" data-room="3">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Room Details Modal -->
+    <div id="room-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">PD leisure</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-img">
+                    <img id="modal-img" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Room Image">
+                </div>
+                <div class="modal-details">
+                    <h4>Room Details</h4>
+                    <p id="modal-description">Wake up to stunning ocean views from your private balcony in this spacious suite. The room features a king-size bed, modern bathroom, and comfortable seating area. Decorated in a contemporary beach style with natural materials.</p>
+                    
+                    <h4>Amenities</h4>
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-wifi"></i>
+                            <span>Free WiFi</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-tv"></i>
+                            <span>Smart TV</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-snowflake"></i>
+                            <span>Air Conditioning</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-coffee"></i>
+                            <span>Water Machine</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-umbrella-beach"></i>
+                            <span>Netflix</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-parking"></i>
+                            <span>Free Parking</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Gallery Section -->
+    <section id="gallery" class="photo-gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Photo Gallery</h2>
+                <p>Explore our homestays through these beautiful photos</p>
+            </div>
+            
+            <!-- PD Leisure Homestay Gallery -->
+            <h3 style="margin-bottom: 30px; color: var(--primary); text-align: center;">PD Leisure Homestay</h3>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipPHQLUvSG7-YcajWboJQohHyKrpcb8sEWRoVe8g=s1360-w1360-h1020-rw" alt="PD Leisure Homestay">
+                    <div class="gallery-caption">
+                        <h4>Living Area</h4>
+                        <p>Spacious and comfortable</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipNuvJmHVuw6OaceGh5di5d-S-uPcU2OyT0uZfe9=s1360-w1360-h1020-rw" alt="PD Leisure Homestay">
+                    <div class="gallery-caption">
+                        <h4>Bedroom</h4>
+                        <p>Cozy sleeping area</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipO6sCbpkiejHyd89eo3qhfVK2wyu4PNCPcJ3jrm=w408-h306-k-no" alt="PD Leisure Homestay">
+                    <div class="gallery-caption">
+                        <h4>Kitchen</h4>
+                        <p>Fully equipped</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipM1C1cQ3Jh3U6Q1Q9Qm9ZQZQ9Qm9ZQZQ9Qm9ZQZQ=w408-h306-k-no" alt="PD Leisure Homestay">
+                    <div class="gallery-caption">
+                        <h4>Bathroom</h4>
+                        <p>Modern and clean</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipNuvJmHVuw6OaceGh5di5d-S-uPcU2OyT0uZfe9=s1360-w1360-h1020-rw" alt="PD Leisure Homestay">
+                    <div class="gallery-caption">
+                        <h4>Dining Area</h4>
+                        <p>Perfect for family meals</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipO6sCbpkiejHyd89eo3qhfVK2wyu4PNCPcJ3jrm=w408-h306-k-no" alt="PD Leisure Homestay">
+                    <div class="gallery-caption">
+                        <h4>Balcony</h4>
+                        <p>Beautiful views</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipM1C1cQ3Jh3U6Q1Q9Qm9ZQZQ9Qm9ZQZQ9Qm9ZQZQ=w408-h306-k-no" alt="PD Leisure Homestay">
+                    <div class="gallery-caption">
+                        <h4>Living Room</h4>
+                        <p>Comfortable seating</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipNuvJmHVuw6OaceGh5di5d-S-uPcU2OyT0uZfe9=s1360-w1360-h1020-rw" alt="PD Leisure Homestay">
+                    <div class="gallery-caption">
+                        <h4>Bedroom</h4>
+                        <p>Queen size bed</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipO6sCbpkiejHyd89eo3qhfVK2wyu4PNCPcJ3jrm=w408-h306-k-no" alt="PD Leisure Homestay">
+                    <div class="gallery-caption">
+                        <h4>Kitchen</h4>
+                        <p>Modern appliances</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipM1C1cQ3Jh3U6Q1Q9Qm9ZQZQ9Qm9ZQZQ9Qm9ZQZQ=w408-h306-k-no" alt="PD Leisure Homestay">
+                    <div class="gallery-caption">
+                        <h4>Bathroom</h4>
+                        <p>Spacious shower</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PD Leisure Tmn NLFCS Gallery -->
+            <h3 style="margin-bottom: 30px; color: var(--primary); text-align: center; margin-top: 60px;">PD Leisure Tmn NLFCS</h3>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipO6sCbpkiejHyd89eo3qhfVK2wyu4PNCPcJ3jrm=w408-h306-k-no" alt="PD Leisure Tmn NLFCS">
+                    <div class="gallery-caption">
+                        <h4>Living Room</h4>
+                        <p>Spacious area</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipNuvJmHVuw6OaceGh5di5d-S-uPcU2OyT0uZfe9=s1360-w1360-h1020-rw" alt="PD Leisure Tmn NLFCS">
+                    <div class="gallery-caption">
+                        <h4>Bedroom</h4>
+                        <p>Comfortable beds</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipPHQLUvSG7-YcajWboJQohHyKrpcb8sEWRoVe8g=s1360-w1360-h1020-rw" alt="PD Leisure Tmn NLFCS">
+                    <div class="gallery-caption">
+                        <h4>Kitchen</h4>
+                        <p>Modern design</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipM1C1cQ3Jh3U6Q1Q9Qm9ZQZQ9Qm9ZQZQ9Qm9ZQZQ=w408-h306-k-no" alt="PD Leisure Tmn NLFCS">
+                    <div class="gallery-caption">
+                        <h4>Bathroom</h4>
+                        <p>Clean and modern</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipO6sCbpkiejHyd89eo3qhfVK2wyu4PNCPcJ3jrm=w408-h306-k-no" alt="PD Leisure Tmn NLFCS">
+                    <div class="gallery-caption">
+                        <h4>Dining Area</h4>
+                        <p>Family meals</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipNuvJmHVuw6OaceGh5di5d-S-uPcU2OyT0uZfe9=s1360-w1360-h1020-rw" alt="PD Leisure Tmn NLFCS">
+                    <div class="gallery-caption">
+                        <h4>Living Space</h4>
+                        <p>Comfortable</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipPHQLUvSG7-YcajWboJQohHyKrpcb8sEWRoVe8g=s1360-w1360-h1020-rw" alt="PD Leisure Tmn NLFCS">
+                    <div class="gallery-caption">
+                        <h4>Bedroom</h4>
+                        <p>Cozy</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipM1C1cQ3Jh3U6Q1Q9Qm9ZQZQ9Qm9ZQZQ9Qm9ZQZQ=w408-h306-k-no" alt="PD Leisure Tmn NLFCS">
+                    <div class="gallery-caption">
+                        <h4>Kitchen</h4>
+                        <p>Fully equipped</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipO6sCbpkiejHyd89eo3qhfVK2wyu4PNCPcJ3jrm=w408-h306-k-no" alt="PD Leisure Tmn NLFCS">
+                    <div class="gallery-caption">
+                        <h4>Bathroom</h4>
+                        <p>Modern</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipNuvJmHVuw6OaceGh5di5d-S-uPcU2OyT0uZfe9=s1360-w1360-h1020-rw" alt="PD Leisure Tmn NLFCS">
+                    <div class="gallery-caption">
+                        <h4>View</h4>
+                        <p>Beautiful scenery</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- No Name Homestay Gallery -->
+            <h3 style="margin-bottom: 30px; color: var(--primary); text-align: center; margin-top: 60px;">No Name Homestay</h3>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="https://scontent.fmkz1-1.fna.fbcdn.net/v/t39.30808-6/494209025_1260303519428384_779238808066989288_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=sYlFL5NsSMgQ7kNvwFogKG-&_nc_oc=Adlx62cH4pUGBGDFUCS5tINJUxTrg1oBzbW01lB37FW3zzjjv6AGRg0k4Hf1NCEprBU&_nc_zt=23&_nc_ht=scontent.fmkz1-1.fna&_nc_gid=Lr7M4IDmQ-k43UddarZrow&oh=00_AfOv4-eGw-fykOLysKzuActVeVk0t2RQOsjIdb0UgNQ3WA&oe=6866DDE9" alt="No Name Homestay">
+                    <div class="gallery-caption">
+                        <h4>Living Area</h4>
+                        <p>Spacious</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipNuvJmHVuw6OaceGh5di5d-S-uPcU2OyT0uZfe9=s1360-w1360-h1020-rw" alt="No Name Homestay">
+                    <div class="gallery-caption">
+                        <h4>Bedroom</h4>
+                        <p>Comfortable</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipO6sCbpkiejHyd89eo3qhfVK2wyu4PNCPcJ3jrm=w408-h306-k-no" alt="No Name Homestay">
+                    <div class="gallery-caption">
+                        <h4>Kitchen</h4>
+                        <p>Modern</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipPHQLUvSG7-YcajWboJQohHyKrpcb8sEWRoVe8g=s1360-w1360-h1020-rw" alt="No Name Homestay">
+                    <div class="gallery-caption">
+                        <h4>Bathroom</h4>
+                        <p>Clean</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipM1C1cQ3Jh3U6Q1Q9Qm9ZQZQ9Qm9ZQZQ9Qm9ZQZQ=w408-h306-k-no" alt="No Name Homestay">
+                    <div class="gallery-caption">
+                        <h4>Dining Area</h4>
+                        <p>Family meals</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://scontent.fmkz1-1.fna.fbcdn.net/v/t39.30808-6/494209025_1260303519428384_779238808066989288_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=sYlFL5NsSMgQ7kNvwFogKG-&_nc_oc=Adlx62cH4pUGBGDFUCS5tINJUxTrg1oBzbW01lB37FW3zzjjv6AGRg0k4Hf1NCEprBU&_nc_zt=23&_nc_ht=scontent.fmkz1-1.fna&_nc_gid=Lr7M4IDmQ-k43UddarZrow&oh=00_AfOv4-eGw-fykOLysKzuActVeVk0t2RQOsjIdb0UgNQ3WA&oe=6866DDE9" alt="No Name Homestay">
+                    <div class="gallery-caption">
+                        <h4>Living Room</h4>
+                        <p>Comfortable</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipNuvJmHVuw6OaceGh5di5d-S-uPcU2OyT0uZfe9=s1360-w1360-h1020-rw" alt="No Name Homestay">
+                    <div class="gallery-caption">
+                        <h4>Bedroom</h4>
+                        <p>Queen bed</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipO6sCbpkiejHyd89eo3qhfVK2wyu4PNCPcJ3jrm=w408-h306-k-no" alt="No Name Homestay">
+                    <div class="gallery-caption">
+                        <h4>Kitchen</h4>
+                        <p>Appliances</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipPHQLUvSG7-YcajWboJQohHyKrpcb8sEWRoVe8g=s1360-w1360-h1020-rw" alt="No Name Homestay">
+                    <div class="gallery-caption">
+                        <h4>Bathroom</h4>
+                        <p>Shower</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipM1C1cQ3Jh3U6Q1Q9Qm9ZQZQ9Qm9ZQZQ9Qm9ZQZQ=w408-h306-k-no" alt="No Name Homestay">
+                    <div class="gallery-caption">
+                        <h4>View</h4>
+                        <p>Scenic</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Section -->
+    <section id="amenities" class="amenities">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Facilities</h2>
+                <p>Enjoy our premium amenities designed for your comfort and relaxation</p>
+            </div>
+            <div class="amenities-grid">
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h4>Wifi</h4>
+                    <p>High speed wifi provited</p>
+                </div>
+                
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h4>water dispenser</h4>
+                    <p>not sure....</p>
+                </div>
+                
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h4>Barbeque</h4>
+                    <p>We provite barbeque equipment</p>
+                </div>
+                
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h4>swimming pool</h4>
+                    <p>We provite small inflatable swimming pool</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>About Us</h4>
+                    <p>PD Leisure Homestay is a beachfront property located in beautiful Port Dickson, offering comfortable accommodations and excellent service.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> 41a, Lorong Tj 1, Taman Tanjung, 71000 Port Dickson, Negeri Sembilan</p>
+                        <p><i class="fas fa-phone-alt"></i> +012-674 5355</p>
+                        <p><i class="fas fa-envelope"></i> info@pdleisure.com</p>
+                        <p><i class="fas fa-clock"></i> 24/7 Reception</p>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to receive special offers and updates</p>
+                    <form class="footer-form">
+                        <input type="email" placeholder="Your Email Address" required>
+                        <button type="submit" class="btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 PD Leisure Homestay. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="effects.js"></script>
+
+    <script>
+        // Modal Interaction
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('room-modal');
+            const viewButtons = document.querySelectorAll('.view-details');
+            const closeModal = document.querySelector('.close-modal');
+            
+            // Room details data
+            const roomDetails = {
+                1: {
+                    title: 'Leisure homestay',
+                    img: 'https://lh3.googleusercontent.com/p/AF1QipPHQLUvSG7-YcajWboJQohHyKrpcb8sEWRoVe8g=s1360-w1360-h1020-rw',
+                    description: '1.4km to Pantai Tanjung Gemok. The room features a king-size bed, a queen-size bed and three mattressess, modern bathroom, and comfortable seating area.',
+                    price: 'RM1/night'
+                },
+                2: {
+                    title: 'Leisure2 Tmn NLFCS',
+                    img: 'https://lh3.googleusercontent.com/p/AF1QipO6sCbpkiejHyd89eo3qhfVK2wyu4PNCPcJ3jrm=w408-h306-k-no',
+                    description: '.',
+                    price: 'RM244/night'
+                },
+                3: {
+                    title: 'No',
+                    img: 'https://scontent.fmkz1-1.fna.fbcdn.net/v/t39.30808-6/494209025_1260303519428384_779238808066989288_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=sYlFL5NsSMgQ7kNvwFogKG-&_nc_oc=Adlx62cH4pUGBGDFUCS5tINJUxTrg1oBzbW01lB37FW3zzjjv6AGRg0k4Hf1NCEprBU&_nc_zt=23&_nc_ht=scontent.fmkz1-1.fna&_nc_gid=Lr7M4IDmQ-k43UddarZrow&oh=00_AfOv4-eGw-fykOLysKzuActVeVk0t2RQOsjIdb0UgNQ3WA&oe=6866DDE9',
+                    description: 'Two-story villa with private pool, ideal for groups and special occasions. Includes three bedrooms, full kitchen, spacious living areas, and outdoor dining. Perfect for memorable gatherings.',
+                    price: 'RM1/night'
+                }
+            };
+            
+            // Open modal
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const roomId = this.getAttribute('data-room');
+                    const room = roomDetails[roomId];
+                    
+                    document.getElementById('modal-title').textContent = room.title;
+                    document.getElementById('modal-img').src = room.img;
+                    document.getElementById('modal-description').textContent = room.description;
+                    
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
