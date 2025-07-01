@@ -1,0 +1,130 @@
+/* Glowing effect for elements */
+.glowing {
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 5px -5px #fff, 0 0 10px -5px #fff, 
+                    0 0 15px -5px #e67e22, 0 0 20px -5px #e67e22;
+    }
+    to {
+        box-shadow: 0 0 5px 2px #fff, 0 0 10px 5px #fff, 
+                    0 0 15px 7px #e67e22, 0 0 20px 10px #e67e22;
+    }
+}
+
+/* Pulse animation for call-to-action */
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(230, 126, 34, 0.4);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 7px 20px rgba(230, 126, 34, 0.6);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(230, 126, 34, 0.4);
+    }
+}
+
+/* Water ripple effect */
+.ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.4);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 0 0;
+}
+
+.ripple:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.4;
+    }
+    20% {
+        transform: scale(25, 25);
+        opacity: 0.2;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(50, 50);
+    }
+}
+
+/* Discount Popup Styles */
+.discount-popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--accent);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 10000;
+    max-width: 300px;
+    transform: translateY(150%);
+    animation: slideUp 0.5s forwards 2s;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.discount-popup .close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.discount-popup h4 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.discount-popup p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.discount-code {
+    background: rgba(255,255,255,0.2);
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5px;
+}
+
+@keyframes slideUp {
+    to {
+        transform: translateY(0);
+    }
+}
