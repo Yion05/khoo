@@ -97,33 +97,59 @@ function createDiscountPopup() {
 document.addEventListener('DOMContentLoaded', () => {
     createBubbles();
     applyEffects();
-    createDiscountPopup(); // Add this line to initialize the popup
+    createDiscountPopup();
     
-    // Add ripple effect to buttons
+    // 按钮涟漪效果
     const buttons = document.querySelectorAll('.btn');
     buttons.forEach(button => {
         button.addEventListener('click', function(e) {
-            // Remove any existing ripple
-            const ripple = this.querySelector('.ripple-effect');
-            if (ripple) ripple.remove();
-            
-            // Create new ripple
-            const circle = document.createElement('span');
-            circle.classList.add('ripple-effect');
-            
-            // Position the ripple
-            const d = Math.max(this.offsetWidth, this.offsetHeight);
-            circle.style.width = circle.style.height = d + 'px';
-            
-            circle.style.left = (e.pageX - this.offsetLeft - d / 2) + 'px';
-            circle.style.top = (e.pageY - this.offsetTop - d / 2) + 'px';
-            
-            this.appendChild(circle);
-            
-            // Remove ripple after animation completes
+            // 波浪加速效果
+            document.body.style.animationDuration = '5s';
             setTimeout(() => {
-                if (circle) circle.remove();
-            }, 600);
+                document.body.style.animationDuration = '15s';
+            }, 500);
         });
+    });
+    
+    // 图片放大功能
+    const imageModal = document.createElement('div');
+    imageModal.id = 'imageModal';
+    imageModal.className = 'image-modal';
+    imageModal.innerHTML = `
+        <span class="close-image-modal">&times;</span>
+        <img class="image-modal-content" id="expandedImg">
+        <div class="caption-text" id="imgCaption"></div>
+    `;
+    document.body.appendChild(imageModal);
+
+    const expandedImg = document.getElementById('expandedImg');
+    const imgCaption = document.getElementById('imgCaption');
+    const modalClose = document.querySelector('.close-image-modal');
+    
+    // 获取所有画廊图片
+    const galleryImages = document.querySelectorAll('.gallery-item img');
+    
+    galleryImages.forEach(img => {
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', function() {
+            imageModal.style.display = 'block';
+            expandedImg.src = this.src;
+            imgCaption.innerHTML = this.alt || this.nextElementSibling.querySelector('h4').textContent;
+            document.body.style.overflow = 'hidden';
+        });
+    });
+    
+    // 关闭模态框
+    modalClose.addEventListener('click', function() {
+        imageModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+    
+    // 点击背景关闭
+    imageModal.addEventListener('click', function(e) {
+        if (e.target === imageModal) {
+            imageModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
     });
 });
