@@ -83,7 +83,7 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    z-index: 10000;
+    z-index: 10001; /* Highest z-index */
     max-width: 300px;
     transform: translateY(150%);
     animation: slideUp 0.5s forwards 2s;
@@ -127,4 +127,86 @@
     to {
         transform: translateY(0);
     }
+}
+
+/* Image Modal Styles */
+.image-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000; /* Below discount popup */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow: auto;
+}
+
+.image-modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 800px;
+    animation: zoom 0.3s;
+}
+
+@keyframes zoom {
+    from {transform: scale(0.1)}
+    to {transform: scale(1)}
+}
+
+.close-image-modal {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close-image-modal:hover,
+.close-image-modal:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.caption-text {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 800px;
+    text-align: center;
+    color: #fff;
+    padding: 10px 0;
+    font-size: 1.2rem;
+}
+
+/* Dynamic wave background */
+body {
+  background: 
+    /* Semi-transparent wave layer */
+    url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 100" xmlns="http://www.w3.org/2000/svg" opacity="0.08"><path fill="%232a6b7a" d="M0,70 C150,40 300,90 450,70 C600,50 750,40 900,60 C1050,80 1200,60 1200,60 L1200,100 L0,100 Z"></path></svg>') bottom/1200px repeat-x,
+    /* Ocean gradient */
+    linear-gradient(to bottom, 
+      rgba(202, 231, 240, 0.7) 0%, 
+      rgba(144, 202, 220, 0.5) 100%),
+    /* Subtle sand texture */
+    url('https://www.transparenttextures.com/patterns/beige-paper.png');
+  animation: waveFlow 15s linear infinite;
+  background-attachment: fixed;
+}
+
+@keyframes waveFlow {
+  from { background-position-x: 0, 0, 0; }
+  to { background-position-x: 1200px, 0, 0; }
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  body {
+    animation-duration: 25s;
+    background-size: 800px 80px, auto, auto;
+  }
 }
