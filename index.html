@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PD Leisure Homestay - Beachfront Paradise</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="effects.css">
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2a6b7a;
+            --secondary: #f5e6c8;
+            --accent: #e67e22;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --sand: #e6d3a7;
+            --ocean: #3498db;
+        }
+
+        body {
+            color: var(--dark);
+            line-height: 1.6;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scroll when sidebar is off-screen */
+            /* Enhanced Dynamic wave background */
+            background:
+                /* Top wave layer - faster, lighter */
+                url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 100" xmlns="http://www.w3.org/2000/svg" opacity="0.15"><path fill="%23a0d9e7" d="M0,70 C150,40 300,90 450,70 C600,50 750,40 900,60 C1050,80 1200,60 1200,60 L1200,100 L0,100 Z"></path></svg>') bottom -20px left 0 / 1200px 100px repeat-x,
+                /* Middle wave layer - medium speed, primary color */
+                url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 100" xmlns="http://www.w3.org/2000/svg" opacity="0.1"><path fill="%232a6b7a" d="M0,80 C150,50 300,100 450,80 C600,60 750,50 900,70 C1050,90 1200,70 1200,70 L1200,100 L0,100 Z"></path></svg>') bottom -10px left 0 / 1000px 100px repeat-x,
+                /* Ocean gradient - deeper blue */
+                linear-gradient(to bottom,
+                    rgba(173, 216, 230, 0.7) 0%, /* Lighter blue */
+                    rgba(70, 130, 180, 0.5) 100%), /* Steel blue */
+                /* Subtle sand texture */
+                url('https://www.transparenttextures.com/patterns/beige-paper.png');
+            animation: waveFlow1 15s linear infinite, waveFlow2 25s linear infinite; /* Two animations for two wave layers */
+            background-attachment: fixed;
+        }
+
+        @keyframes waveFlow1 {
+            from { background-position-x: 0, 0, 0, 0; }
+            to { background-position-x: 1200px, 0, 0, 0; }
+        }
+
+        @keyframes waveFlow2 {
+            from { background-position-x: 0, 0, 0, 0; }
+            to { background-position-x: 0, 1000px, 0, 0; } /* Only second layer animates horizontally */
+        }
+
+        /* Mobile optimization for background */
+        @media (max-width: 768px) {
+            body {
+                animation-duration: 25s, 35s; /* Slower animations on mobile */
+                background-size: 800px 80px, 600px 80px, auto, auto;
+            }
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 10px 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer; /* Indicate clickable for sidebar */
+            z-index: 1001; /* Ensure logo is above sidebar when it's closed */
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Sidebar Menu Styles */
+        .sidebar-menu {
+            position: fixed;
+            top: 0;
+            left: -250px; /* Hidden by default */
+            width: 250px;
+            height: 100%;
+            background-color: var(--primary);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+            transition: left 0.3s ease-in-out;
+            z-index: 1000; /* Below header, above content */
+            padding-top: 60px; /* Space for close button */
+            color: white;
+        }
+
+        .sidebar-menu.open {
+            left: 0; /* Slide in */
+        }
+
+        .sidebar-menu ul {
+            list-style: none;
+            padding: 0;
+            display: block; /* Override flex */
+            flex-direction: column; /* Stack items vertically */
+        }
+
+        .sidebar-menu ul li {
+            width: 100%;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-menu ul li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar-menu a:hover {
+            background-color: var(--accent);
+            color: var(--dark);
+        }
+
+        .sidebar-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .sidebar-close-btn:hover {
+            transform: rotate(90deg);
+        }
+
+        /* Overlay for when sidebar is open */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 999; /* Below sidebar, above content */
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'); /* Static background for hero */
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+            /* Removed transition as background is now static */
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            animation: fadeIn 1.5s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            animation: fadeIn 2s ease;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 14px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.4);
+            animation: fadeIn 2.5s ease;
+        }
+
+        .btn:hover {
+            background-color: #d35400;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(230, 126, 34, 0.6);
+        }
+        
+        /* Added margin-top for the map button */
+        .btn.map-btn {
+            margin-top: 25px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Sections Title */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--primary);
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 15px auto 0;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        /* Animation for section titles */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Rooms Section */
+        .rooms {
+            padding: 80px 0;
+            /* Changed to a soft, light blue background */
+            background-color: #e0f7fa; /* A very light, soft blue */
+            color: var(--dark); /* Keep text dark for contrast */
+        }
+
+        .rooms .section-title h2,
+        .rooms .section-title p {
+            color: var(--primary); /* Ensure title and paragraph are visible on light background */
+            text-shadow: none; /* Remove text shadow as it's not needed on light background */
+            animation: slideInUp 1s ease-out; /* Added animation */
+        }
+
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .room-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .room-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .room-img {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .room-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .room-card:hover .room-img img {
+            transform: scale(1.05);
+        }
+
+        .room-content {
+            padding: 25px;
+        }
+
+        .room-content h3 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .room-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        .room-info i {
+            margin-right: 5px;
+            color: var(--accent);
+        }
+
+        .room-price {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .room-price span {
+            font-size: 1rem;
+            font-weight: normal;
+            color: #777;
+        }
+
+        .room-content p {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 30px 0;
+        }
+
+        .modal-content {
+            background-color: white;
+            max-width: 900px;
+            margin: 30px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            animation: modalOpen 0.6s ease;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+        }
+
+        @keyframes modalOpen {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            padding: 25px;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 2rem;
+            letter-spacing: 0.5px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            padding: 5px;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        /* Image Slider/Carousel in Modal */
+        .image-slider {
+            position: relative;
+            width: 100%;
+            height: 350px; /* Fixed height for consistency */
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .slider-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            cursor: zoom-in; /* Indicate clickable */
+        }
+
+        .slider-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .slider-nav-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .prev-btn {
+            left: 10px;
+        }
+
+        .next-btn {
+            right: 10px;
+        }
+
+        .modal-details h4 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .modal-details h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .modal-details p {
+            margin-bottom: 25px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+        }
+
+        .feature i {
+            color: var(--accent);
+            margin-right: 12px;
+            font-size: 1.3rem;
+            width: 25px;
+            text-align: center;
+        }
+
+        /* Amenities Section */
+        .amenities {
+            padding: 100px 0;
+            /* Added linear-gradient overlay for better text contrast */
+            background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+                              url('https://images.unsplash.com/photo-1520457159981-d1010f39849b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'); /* Beach photo for amenities */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--dark); /* Keep text dark for contrast on potentially lighter image */
+        }
+
+        .amenities .section-title h2,
+        .amenities .section-title p {
+            color: var(--dark); /* Ensure title and paragraph are visible */
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.9); /* Stronger text shadow for readability */
+            animation: slideInUp 1s ease-out; /* Added animation */
+        }
+
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .amenity-item {
+            background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent white for readability */
+            padding: 40px 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.4s;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .amenity-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .amenity-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            transition: all 0.3s;
+        }
+
+        .amenity-item:hover .amenity-icon {
+            transform: scale(1.1);
+            color: var(--accent);
+        }
+
+        .amenity-item h4 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .amenity-item p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* About Us Section Styles */
+        .about-us-section {
+            padding: 80px 0;
+            background-color: #e0f7fa; /* Changed from var(--light) to a light blue */
+        }
+
+        .about-us-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .about-text-container {
+            flex: 2;
+            min-width: 300px;
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .about-text-container h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .about-text-container p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .about-info-container {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--primary);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .about-info-container h3 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            text-align: center;
+            color: var(--sand);
+        }
+
+        .about-info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .about-info-item i {
+            margin-right: 15px;
+            color: var(--accent);
+            font-size: 1.5rem;
+            width: 30px;
+            text-align: center;
+        }
+
+        .about-info-item p {
+            flex: 1;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .about-social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .about-social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.4rem;
+        }
+
+        .about-social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .modal-body {
+                grid-template-columns: 1fr;
+            }
+
+            .image-slider {
+                height: 300px;
+            }
+
+            /* Hide regular nav on smaller screens */
+            header nav {
+                display: none;
+            }
+
+            .about-us-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-text-container,
+            .about-info-container {
+                width: 90%;
+                max-width: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.4rem;
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 0;
+            }
+
+            .logo {
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                height: 80vh;
+            }
+
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .room-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .amenities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-text-container,
+            .about-info-container {
+                padding: 30px;
+            }
+
+            .about-info-item {
+                font-size: 1rem;
+            }
+        }
+
+        /* Image Modal Styles (from effects.css, adapted for this context) */
+        /* This modal will open on top of the room details modal */
+        .image-zoom-modal {
+            display: none;
+            position: fixed;
+            z-index: 3000; /* Higher than room-modal */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+            animation: zoom 0.3s;
+        }
+
+        .image-zoom-modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 800px;
+            margin-top: 50px; /* Adjust as needed */
+        }
+
+        .close-image-zoom-modal {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close-image-zoom-modal:hover,
+        .close-image-zoom-modal:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .caption-text-zoom { /* New class for zoom modal caption */
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+            color: #fff;
+            padding: 10px 0;
+            font-size: 1.2rem;
+        }
+
+        @keyframes zoom {
+            from {transform: scale(0.1)}
+            to {transform: scale(1)}
+        }
+
+        /* Image Zoom Modal Navigation Buttons */
+        .image-zoom-modal .slider-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1.8rem; /* Slightly larger for zoom modal */
+            cursor: pointer;
+            z-index: 3001; /* Higher than zoom modal content */
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .image-zoom-modal .slider-nav-btn:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .image-zoom-modal .prev-btn {
+            left: 20px;
+        }
+
+        .image-zoom-modal .next-btn {
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo" id="logo-trigger">
+                <img src="https://www.creativefabrica.com/wp-content/uploads/2020/03/09/Beach-logo-Graphics-3535417-1.jpg" alt="PD Leisure Homestay Logo" class="logo-img">
+                <h1 class="logo-text">PD Leisure Homestay</h1>
+            </div>
+            <!-- Regular navigation - hidden on smaller screens -->
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#rooms">HOMESTAY</a></li>
+                    <li><a href="#amenities">FACILITIES</a></li>
+                    <li><a href="#about">ABOUT US</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sidebar Menu -->
+    <div id="sidebar-menu" class="sidebar-menu">
+        <button class="sidebar-close-btn">&times;</button>
+        <ul>
+            <li><a href="#">HOME</a></li>
+            <li><a href="#rooms">HOMESTAY</a></li>
+            <li><a href="#amenities">FACILITIES</a></li>
+            <li><a href="#about">ABOUT US</a></li>
+        </ul>
+    </div>
+
+    <!-- Overlay for sidebar -->
+    <div id="overlay" class="overlay"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero-section">
+        <div class="hero-content">
+            <h2>PD Leisure Homestay</h2>
+            <p>Since 2016 | Your preferred Homestay in PD</p>
+            <a href="#rooms" class="btn pulse">Selection Of House</a>
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section id="rooms" class="rooms">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Accommodations</h2>
+                <p>Experience comfort and luxury in our beautifully designed rooms</p>
+                <p>(Check-in time 3pm, Check-out time 12pm)</p>
+            </div>
+            <div class="room-grid">
+                <!-- Room 1 -->
+                <div class="room-card glow-on-hover">
+                    <div class="room-img">
+                        <img src="https://yion05.github.io/my-website-project/images/85524f38-ffbf-4d14-af1c-d48e0dcc3294.avif" alt="PD Leisure Homestay">
+                    </div>
+                    <div class="room-content">
+                        <h3>Taman Tanjung</h3>
+                        <div class="room-info">
+                            <span><i class="fas fa-user-friends"></i> 9 Pax</span>
+                            <span><i class="fas fa-expand-arrows-alt"></i> 60m²</span>
+                        </div>
+                        <div class="room-price">RM450 <span>/night</span></div>
+                        <p>Chill Out in Green Spaces with BBQ Fun! Perfect for Gatherings, Picnics and Good Times!</p>
+                        <button class="btn view-details" data-room="1">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Room 2 -->
+                <div class="room-card glow-on-hover">
+                    <div class="room-img">
+                        <img src="https://yion05.github.io/my-website-project/images/IMG-20250629-WA0052.jpg" alt="PD Leisure Tmn NLFCS">
+                    </div>
+                    <div class="room-content">
+                        <h3>Taman NLFCS</h3>
+                        <div class="room-info">
+                            <span><i class="fas fa-user-friends"></i> 7 Pax</span>
+                            <span><i class="fas fa-expand-arrows-alt"></i> 50m²</span>
+                        </div>
+                        <div class="room-price">RM320 <span>/night</span></div>
+                        <p>Simple and cozy homestay, walking distance to beach 450m.</p>
+                        <button class="btn view-details" data-room="2">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Room 3 -->
+                <div class="room-card glow-on-hover">
+                    <div class="room-img">
+                        <img src="https://yion05.github.io/my-website-project/images/IMG-20250629-WA0078.jpg" alt="No name">
+                    </div>
+                    <div class="room-content">
+                        <h3>Taman Desa Permai</h3>
+                        <div class="room-info">
+                            <span><i class="fas fa-user-friends"></i> 8 Pax</span>
+                            <span><i class="fas fa-expand-arrows-alt"></i> 120m²</span>
+                        </div>
+                        <div class="room-price">RM380 <span>/night</span></div>
+                        <p>A cozy and spacious homestay for your family.</p>
+                        <button class="btn view-details" data-room="3">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Room Details Modal -->
+    <div id="room-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Taman Tanjung</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Image Slider for Room Gallery -->
+                <div class="image-slider">
+                    <img id="modal-img" class="slider-image" src="" alt="Room Image">
+                    <button class="slider-nav-btn prev-btn" id="prev-img-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slider-nav-btn next-btn" id="next-img-btn"><i class="fas fa-chevron-right"></i></button>
+                    <div class="caption-text" id="slider-caption"></div> <!-- Caption for slider image -->
+                </div>
+                <div class="modal-details">
+                    <h4>Room Details And Address</h4>
+                    <p id="modal-description">Wake up to stunning ocean views from your private balcony in this spacious suite. The room features a king-size bed, modern bathroom, and comfortable seating area. Decorated in a contemporary beach style with natural materials.</p>
+
+                    <h4>Amenities</h4>
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-wifi"></i>
+                            <span>Free WiFi</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-tv"></i>
+                            <span>Smart TV</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-hotdog"></i>
+                            <span>BBQ Facilities</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-coffee"></i>
+                            <span>Water Machine</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-archway"></i>
+                            <span>Patio</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-parking"></i>
+                            <span>Free Parking</span>
+                        </div>
+                    </div>
+                    <!-- NEW: Google Maps Button -->
+                    <a id="modal-map-link" href="#" target="_blank" rel="noopener noreferrer" class="btn map-btn">
+                        <i class="fas fa-map-marked-alt"></i> View on Map
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Zoom Modal (for clicking on slider images) -->
+    <div id="image-zoom-modal" class="image-zoom-modal">
+        <span class="close-image-zoom-modal">&times;</span>
+        <img class="image-zoom-modal-content" id="expanded-zoom-img">
+        <button class="slider-nav-btn prev-btn" id="zoom-prev-btn"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-nav-btn next-btn" id="zoom-next-btn"><i class="fas fa-chevron-right"></i></button>
+        <div class="caption-text-zoom" id="zoom-img-caption"></div>
+    </div>
+
+    <!-- Amenities Section -->
+    <section id="amenities" class="amenities">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Facilities</h2>
+                <p>Enjoy our premium amenities designed for your comfort and relaxation</p>
+            </div>
+            <div class="amenities-grid">
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h4>High-Speed WiFi</h4>
+                    <p>Stay connected with our complimentary high-speed internet access.</p>
+                </div>
+
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h4>Cooking Facility</h4>
+                    <p>A fully equipped kitchen is available for your culinary needs.</p>
+                </div>
+
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h4>Washing Machine</h4>
+                    <p>Convenient laundry facilities to keep you fresh during your stay.</p>
+                </div>
+
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-snowflake"></i>
+                    </div>
+                    <h4>Full Aircond</h4>
+                    <p>Enjoy a cool and comfortable environment with full air conditioning.</p>
+                </div>
+
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-parking"></i>
+                    </div>
+                    <h4>Free Parking</h4>
+                    <p>Ample and secure parking space is available for all our guests, free of charge.</p>
+                </div>
+
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <h4>Smart TV</h4>
+                    <p>Entertainment at your fingertips with a modern Smart TV in every unit.</p>
+                </div>
+
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h4>Mini Games for Kids</h4>
+                    <p>Fun and engaging games available to keep the little ones entertained.</p>
+                </div>
+
+                <div class="amenity-item">
+                    <div class="amenity-icon">
+                        <i class="fas fa-hotdog"></i>
+                    </div>
+                    <h4>Free Barbecue Facilities</h4>
+                    <p>We provide all the necessary equipment for a perfect barbecue party.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section (formerly Contact Section) -->
+    <section id="about" class="about-us-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Us</h2>
+                <p>Learn more about PD Leisure Homestay and our commitment to your comfort.</p>
+            </div>
+            <div class="about-us-content">
+                <div class="about-text-container">
+                    <h3>Our Story</h3>
+                    <p>My name is Khoo, Born in Port Dickson and currently stay Port Dickson too. I love Malaysia and i also love my Hometown. I like to travel like you also, coz it will give me feel Relax and being attract by seeing the New place, different culture and different society in every place. This is why I start my business to manage my Homestay in Port Dickson. Thx for our Guests support. We Promise to deliver the better service to you.<p>
+                    <p>Welcome to PD Leisure Homestay, your ultimate home away from home nestled in the beautiful coastal town of Port Dickson. We are passionately dedicated to creating a serene and comfortable retreat perfect for families, couples and solo adventurers alike who are seeking a truly memorable beachfront experience. Our accommodations are thoughtfully designed with your relaxation in mind, offering the perfect fusion of modern amenities and a cozy, inviting atmosphere, ensuring your stay is nothing short of exceptional. Whether you are looking for a peaceful escape or an adventure-filled vacation, PD Leisure Homestay is the ideal choice. On-site, guests can enjoy a friendly game of darts, or venture out to explore the scenic surroundings by cycling. We eagerly look forward to welcoming you and making your visit to Port Dickson a truly unforgettable experience.</p>
+                </div>
+                <script src="effects.js"></script>
+
+                <div class="about-info-container">
+                    <h3>Quick Facts</h3>
+                    <div class="about-info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>Located near Tanjung Gemok Beach, Port Dickson</p>
+                    </div>
+                    <div class="about-info-item">
+                        <i class="fas fa-home"></i>
+                        <p>Multiple homestay options for various group sizes</p>
+                    </div>
+                    <div class="about-info-item">
+                        <i class="fas fa-star"></i>
+                        <p>Committed to 5-star guest satisfaction</p>
+                    </div>
+                    <div class="about-info-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <p>Open for bookings with one click</p>
+                    </div>
+                    <div class="about-social-links">
+                        <a href="https://www.facebook.com/profile.php?id=100063462436139" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.agoda.com/zh-hk/pd-leisure-homestay-taman-tanjung/hotel/all/port-dickson-my.html?countryId=198&finalPriceView=1&isShowMobileAppPrice=false&cid=1915002&numberOfBedrooms=&familyMode=false&adults=2&children=0&rooms=2&maxRooms=0&checkIn=2025-07-8&isCalendarCallout=false&childAges=&numberOfGuest=0&missingChildAges=false&travellerType=3&showReviewSubmissionEntry=false&currencyCode=MYR&isFreeOccSearch=false&tag=2a319a5d-5af3-4368-ea36-330cad036406&los=1&searchrequestid=5d056bcc-9cb6-4420-824b-7996bb0fdac1&ds=XspHnhBHeuXW%2FX3H" aria-label="Agoda"><i class="fab fa-building"></i></a>
+                        <a href="https://wa.me/+60126745355" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://zh.airbnb.com/rooms/10790495?_set_bev_on_new_domain=1752217860_EAYmU1N2M3M2JhMz&source_impression_id=p3_1752219547_P3D8mUT3MCvjyD2P" aria-label="TripAdvisor"><i class="fab fa-airbnb"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="container">
+            <p>PD Leisure Homestay</p>
+        </div>
+    </footer>
+
+    <script>
+        // Modal Interaction and Image Slider
+        document.addEventListener('DOMContentLoaded', function() {
+            const roomModal = document.getElementById('room-modal');
+            const viewButtons = document.querySelectorAll('.view-details');
+            const closeRoomModal = document.querySelector('.close-modal');
+            const modalImg = document.getElementById('modal-img');
+            const prevImgBtn = document.getElementById('prev-img-btn');
+            const nextImgBtn = document.getElementById('next-img-btn');
+            const sliderCaption = document.getElementById('slider-caption');
+            const modalMapLink = document.getElementById('modal-map-link');
+
+            // Image Zoom Modal Elements
+            const imageZoomModal = document.getElementById('image-zoom-modal');
+            const expandedZoomImg = document.getElementById('expanded-zoom-img');
+            const zoomImgCaption = document.getElementById('zoom-img-caption');
+            const closeImageZoomModal = document.querySelector('.close-image-zoom-modal');
+            const zoomPrevBtn = document.getElementById('zoom-prev-btn'); // New: Zoom modal prev button
+            const zoomNextBtn = document.getElementById('zoom-next-btn'); // New: Zoom modal next button
+
+            let currentGalleryImages = []; // Stores images for the current room's slider
+            let currentImageIndex = 0; // Current index for the room's slider
+
+            let currentZoomImages = []; // Stores images for the zoom modal's slider
+            let currentZoomIndex = 0; // Current index for the zoom modal's slider
+
+            // Sidebar elements
+            const sidebarMenu = document.getElementById('sidebar-menu');
+            const sidebarCloseBtn = document.querySelector('.sidebar-close-btn');
+            const logoTrigger = document.getElementById('logo-trigger');
+            const overlay = document.getElementById('overlay');
+
+            // Function to open the sidebar
+            function openSidebar() {
+                sidebarMenu.classList.add('open');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+            }
+
+            // Function to close the sidebar
+            function closeSidebar() {
+                sidebarMenu.classList.remove('open');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Re-enable scrolling
+            }
+
+            // Event listeners for sidebar
+            logoTrigger.addEventListener('mouseenter', openSidebar);
+            sidebarMenu.addEventListener('mouseleave', closeSidebar); // Close when mouse leaves sidebar
+            sidebarCloseBtn.addEventListener('click', closeSidebar);
+            overlay.addEventListener('click', closeSidebar); // Close when clicking overlay
+
+            // Also close sidebar if a navigation link is clicked
+            const sidebarLinks = sidebarMenu.querySelectorAll('a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', closeSidebar);
+            });
+
+            // Function to update the displayed image and caption in the room details slider
+            function updateSliderImage() {
+                if (currentGalleryImages.length > 0) {
+                    modalImg.src = currentGalleryImages[currentImageIndex].src;
+                    sliderCaption.textContent = currentGalleryImages[currentImageIndex].caption;
+                } else {
+                    modalImg.src = ''; // Fallback if no images
+                    sliderCaption.textContent = '';
+                }
+            }
+
+            // Event listener for previous button in room details slider
+            prevImgBtn.addEventListener('click', function() {
+                currentImageIndex = (currentImageIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+                updateSliderImage();
+            });
+
+            // Event listener for next button in room details slider
+            nextImgBtn.addEventListener('click', function() {
+                currentImageIndex = (currentImageIndex + 1) % currentGalleryImages.length;
+                updateSliderImage();
+            });
+
+            // Function to update the displayed image and caption in the zoom modal
+            function updateZoomImage() {
+                if (currentZoomImages.length > 0) {
+                    expandedZoomImg.src = currentZoomImages[currentZoomIndex].src;
+                    zoomImgCaption.textContent = currentZoomImages[currentZoomIndex].caption;
+                } else {
+                    expandedZoomImg.src = '';
+                    zoomImgCaption.textContent = '';
+                }
+            }
+
+            // Event listener for previous button in zoom modal
+            zoomPrevBtn.addEventListener('click', function() {
+                currentZoomIndex = (currentZoomIndex - 1 + currentZoomImages.length) % currentZoomImages.length;
+                updateZoomImage();
+            });
+
+            // Event listener for next button in zoom modal
+            zoomNextBtn.addEventListener('click', function() {
+                currentZoomIndex = (currentZoomIndex + 1) % currentZoomImages.length;
+                updateZoomImage();
+            });
+
+            // Event listener for clicking the slider image to zoom
+            modalImg.addEventListener('click', function() {
+                // When opening the zoom modal, synchronize its state with the room details slider
+                currentZoomImages = currentGalleryImages;
+                currentZoomIndex = currentImageIndex; // Start zoom from the currently displayed image in the slider
+                updateZoomImage(); // Display the image in the zoom modal
+
+                imageZoomModal.style.display = 'block';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when zoomed
+            });
+
+            // Close Image Zoom Modal
+            closeImageZoomModal.addEventListener('click', function() {
+                imageZoomModal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Re-enable scrolling
+            });
+
+            // Close Image Zoom Modal when clicking outside content
+            imageZoomModal.addEventListener('click', function(e) {
+                if (e.target === imageZoomModal) {
+                    imageZoomModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // --- FIXED BUG & ADDED MAP LINKS ---
+            // Room details data with image galleries, captions, and Google Map links
+            const roomDetails = {
+                1: {
+                    title: 'Leisure homestay',
+                    description: 'No 41a Lorong TJ1 Taman Tanjung, 71000 Port Dickson, Negeri Sembilan.',
+                    mapLink: 'https://www.google.com/maps/place/PD+leisure+Homestay/@2.5531895,101.7912187,17z/data=!4m10!1m2!2m1!1sleisure+homestay!3m6!1s0x31cdf3a799444b3b:0xd0a76cf396289d24!8m2!3d2.5531895!4d101.7959823!15sChBsZWlzdXJlIGhvbWVzdGF5WhIiEGxlaXN1cmUgaG9tZXN0YXmSARJwcml2YXRlX2d1ZXN0X3Jvb22aASNDaFpEU1VoTk1HOW5TMFZKUTBGblNVUndiRmxJWDBGM0VBRaoBOBABMh4QASIaCSCsElE9G2EC2A5AUYNe9t06B-D6VSXNXQEyFBACIhBsZWlzdXJlIGhvbWVzdGF54AEA-gEECAAQRQ!16s%2Fg%2F11h3m9js61?entry=ttu',
+                    price: 'Rm450',
+                    adults: 9,
+                    gallery: [
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0040.jpg', caption: 'Outdoor' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0016.jpg', caption: 'Outdoor' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0015.jpg', caption: 'Outdoor Swing' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0045.jpg', caption: 'Bicycle provided' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0014.jpg', caption: 'Outdoor table' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0028.jpg', caption: 'Outdoor table' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0041.jpg', caption: 'BBQ provided' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0026.jpg', caption: 'Living room with free Netflix' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0023.jpg', caption: 'Living room with free Netflix' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0020.jpg', caption: 'Indoor stone table' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0017.jpg', caption: 'Indoor table' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0050.jpg', caption: 'Room 1- two queen size bed' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0049.jpg', caption: 'Room 2- three single floor mattress(4 inch)' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0051.jpg', caption: 'Room 3- one queen size bed' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0032.jpg', caption: 'Room 1 attached bathroom' },
+                        { src: 'https://yion05.github.io/my-website-project/images/WhatsApp Image 2025-07-11 at 15.38.23_d94a502a.jpg', caption: 'Share bathroom' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0046.jpg', caption: 'Fully equipped kitchen' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0030.jpg', caption: 'Washing machine provided' },
+                    ]
+                },
+                2: {
+                    title: 'Taman NLFCS',
+                    description: 'NO 22, Lorong Tun Sambanthan 2, Taman NLFCS, 71000 Port Dickson, Negeri Sembilan.',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=NO+22%2C+Lorong+Tun+Sambanthan+2%2C+Taman+NLFCS%2C+71000+Port+Dickson%2C+Negeri+Sembilan',
+                    price: 'Rm320',
+                    adults: 7,
+                    gallery: [
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0082.jpg', caption: 'Spacious Living Area' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0054.jpg', caption: 'Pleasant outdoor view' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0075.jpg', caption: 'Outdoor shower facility' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0077.jpg', caption: 'Outdoor seating with spare chairs' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0074.jpg', caption: 'BBQ equipment provided' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0055.jpg', caption: 'Living room' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0072.jpg', caption: 'Living room' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0069.jpg', caption: 'Indoor dining table' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0053.jpg', caption: 'Room2- one queen size bed' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0068.jpg', caption: 'Room2- one queen size bed' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0061.jpg', caption: 'Room3- one queen size bed and one super single bed' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0062.jpg', caption: 'Room3- one queen size bed and one super single bed' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0060.jpg', caption: 'Bedroom small table' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0057.jpg', caption: 'Super single bed' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0067.jpg', caption: 'Room1- one king size bed with attached bathroom' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0066.jpg', caption: 'Sharing Bathroom modern shower equipment' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0063.jpg', caption: 'Bathroom with clean sink' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0070.jpg', caption: 'Room1- attached bathroom' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0071.jpg', caption: 'Kitchen' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0059.jpg', caption: 'Fully equipped tableware' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0058.jpg', caption: 'Mop and broom provided' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0065.jpg', caption: 'Washing machine provided' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0064.jpg', caption: 'Back door' },
+                    ]
+                },
+                3: {
+                    title: 'Taman Desa Permai',
+                    description: 'No 146, Lorong Kampung Paya 4, Taman Desa Permai, 71000 Port Dickson, Negeri Sembilan.',
+                    mapLink: 'https://www.google.com/maps/search/?api=1&query=No+146%2C+Lorong+Kampung+Paya+4%2C+Taman+Desa+Permai%2C+71000+Port+Dickson%2C+Negeri+Sembilan',
+                    price: '380',
+                    adults: 8,
+                    gallery: [
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0083.jpg', caption: 'Can fit 4 vehicle and BBQ area' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0084.jpg', caption: 'Spacious Living Area with No plate 146' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0089.jpg', caption: 'No plate 146' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0086.jpg', caption: 'Two bicycle provided' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0080.jpg', caption: 'A chill chair' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0088.jpg', caption: 'BBQ equipment provided' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0085.jpg', caption: 'Container with BBQ equipment' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0087.jpg', caption: 'Container with BBQ equipment' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0092.jpg', caption: 'Living room' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0093.jpg', caption: 'Living room with smart tv' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0104.jpg', caption: 'Room1- one queen size bed' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0099.jpg', caption: 'Room1- one queen size bed' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0103.jpg', caption: 'Room2- one queen size bed' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0094.jpg', caption: 'Room3- two bunk bed' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0095.jpg', caption: 'Dining table' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0100.jpg', caption: 'Indoor game provided' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0101.jpg', caption: 'Kitchen' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0097.jpg', caption: 'Kitchen tableware provided' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0096.jpg', caption: 'Clean Bathroom' },
+                        { src: 'https://yion05.github.io/my-website-project/images/IMG-20250629-WA0098.jpg', caption: 'Bathroom with modern sink' },
+                    ]
+                }
+            };
+
+            // Open room details modal
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const roomId = this.getAttribute('data-room');
+                    const room = roomDetails[roomId];
+
+                    document.getElementById('modal-title').textContent = room.title;
+                    document.getElementById('modal-description').textContent = room.description;
+                    
+                    // Set the href for the map link
+                    modalMapLink.href = room.mapLink;
+
+                    // Set current gallery images and reset index for the room details slider
+                    currentGalleryImages = room.gallery;
+                    currentImageIndex = 0;
+                    updateSliderImage(); // Display the first image and its caption
+
+                    roomModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            // Close room details modal
+            closeRoomModal.addEventListener('click', function() {
+                roomModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+
+            // Close room details modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === roomModal) {
+                    roomModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
