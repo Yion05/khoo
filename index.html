@@ -25,6 +25,10 @@
             --ocean: #3498db;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             color: var(--dark);
             line-height: 1.6;
@@ -240,7 +244,6 @@
             text-align: center;
             color: white;
             margin-bottom: 60px;
-            /* Removed transition as background is now static */
         }
 
         .hero-content {
@@ -253,14 +256,12 @@
             font-size: 3.5rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-            animation: fadeIn 1.5s ease;
         }
 
         .hero p {
             font-size: 1.3rem;
             margin-bottom: 30px;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-            animation: fadeIn 2s ease;
         }
 
         .btn {
@@ -276,7 +277,6 @@
             cursor: pointer;
             font-size: 1.1rem;
             box-shadow: 0 4px 15px rgba(230, 126, 34, 0.4);
-            animation: fadeIn 2.5s ease;
         }
 
         .btn:hover {
@@ -285,7 +285,6 @@
             box-shadow: 0 7px 20px rgba(230, 126, 34, 0.6);
         }
         
-        /* Added margin-top for the map button */
         .btn.map-btn {
             margin-top: 25px;
             width: 100%;
@@ -325,31 +324,17 @@
             color: #555;
         }
 
-        /* Animation for section titles */
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         /* Rooms Section */
         .rooms {
             padding: 80px 0;
-            /* Changed to a soft, light blue background */
-            background-color: #e0f7fa; /* A very light, soft blue */
-            color: var(--dark); /* Keep text dark for contrast */
+            background-color: #e0f7fa;
+            color: var(--dark);
         }
 
         .rooms .section-title h2,
         .rooms .section-title p {
-            color: var(--primary); /* Ensure title and paragraph are visible on light background */
-            text-shadow: none; /* Remove text shadow as it's not needed on light background */
-            animation: slideInUp 1s ease-out; /* Added animation */
+            color: var(--primary);
+            text-shadow: none;
         }
 
         .room-grid {
@@ -593,20 +578,18 @@
         /* Amenities Section */
         .amenities {
             padding: 100px 0;
-            /* Added linear-gradient overlay for better text contrast */
             background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
-                              url('https://images.unsplash.com/photo-1520457159981-d1010f39849b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'); /* Beach photo for amenities */
+                              url('https://images.unsplash.com/photo-1520457159981-d1010f39849b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            color: var(--dark); /* Keep text dark for contrast on potentially lighter image */
+            color: var(--dark);
         }
 
         .amenities .section-title h2,
         .amenities .section-title p {
-            color: var(--dark); /* Ensure title and paragraph are visible */
-            text-shadow: 1px 1px 3px rgba(255,255,255,0.9); /* Stronger text shadow for readability */
-            animation: slideInUp 1s ease-out; /* Added animation */
+            color: var(--dark);
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.9);
         }
 
         .amenities-grid {
@@ -617,7 +600,7 @@
         }
 
         .amenity-item {
-            background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent white for readability */
+            background-color: rgba(255, 255, 255, 0.85);
             padding: 40px 25px;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
@@ -656,7 +639,7 @@
         /* About Us Section Styles */
         .about-us-section {
             padding: 80px 0;
-            background-color: #e0f7fa; /* Changed from var(--light) to a light blue */
+            background-color: #e0f7fa;
         }
 
         .about-us-content {
@@ -764,16 +747,16 @@
             font-size: 0.9rem;
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* NEW: Scroll Animation Classes */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .scroll-animate.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Responsive Design */
@@ -786,7 +769,6 @@
                 height: 300px;
             }
 
-            /* Hide regular nav on smaller screens */
             header nav {
                 display: none;
             }
@@ -858,12 +840,11 @@
             }
         }
 
-        /* Image Modal Styles (from effects.css, adapted for this context) */
-        /* This modal will open on top of the room details modal */
+        /* Image Modal Styles */
         .image-zoom-modal {
             display: none;
             position: fixed;
-            z-index: 3000; /* Higher than room-modal */
+            z-index: 3000;
             left: 0;
             top: 0;
             width: 100%;
@@ -878,7 +859,7 @@
             display: block;
             width: 80%;
             max-width: 800px;
-            margin-top: 50px; /* Adjust as needed */
+            margin-top: 50px;
         }
 
         .close-image-zoom-modal {
@@ -898,7 +879,7 @@
             cursor: pointer;
         }
 
-        .caption-text-zoom { /* New class for zoom modal caption */
+        .caption-text-zoom {
             margin: auto;
             display: block;
             width: 80%;
@@ -914,7 +895,6 @@
             to {transform: scale(1)}
         }
 
-        /* Image Zoom Modal Navigation Buttons */
         .image-zoom-modal .slider-nav-btn {
             position: absolute;
             top: 50%;
@@ -923,9 +903,9 @@
             color: white;
             border: none;
             padding: 10px 15px;
-            font-size: 1.8rem; /* Slightly larger for zoom modal */
+            font-size: 1.8rem;
             cursor: pointer;
-            z-index: 3001; /* Higher than zoom modal content */
+            z-index: 3001;
             border-radius: 5px;
             transition: background-color 0.3s, transform 0.3s;
         }
@@ -942,6 +922,40 @@
         .image-zoom-modal .next-btn {
             right: 20px;
         }
+
+        /* NEW: Back to Top Button */
+        .back-to-top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--accent);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            text-decoration: none;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background-color 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .back-to-top-btn.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top-btn:hover {
+            background-color: #d35400; /* Darker accent */
+            transform: scale(1.1) translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -952,7 +966,6 @@
                 <img src="https://www.creativefabrica.com/wp-content/uploads/2020/03/09/Beach-logo-Graphics-3535417-1.jpg" alt="PD Leisure Homestay Logo" class="logo-img">
                 <h1 class="logo-text">PD Leisure Homestay</h1>
             </div>
-            <!-- Regular navigation - hidden on smaller screens -->
             <nav class="desktop-nav">
                 <ul>
                     <li><a href="#">HOME</a></li>
@@ -981,9 +994,9 @@
     <!-- Hero Section -->
     <section class="hero" id="hero-section">
         <div class="hero-content">
-            <h2>PD Leisure Homestay</h2>
-            <p>Since 2016 | Your preferred Homestay in PD</p>
-            <a href="#rooms" class="btn pulse">Selection Of House</a>
+            <h2 class="scroll-animate">PD Leisure Homestay</h2>
+            <p class="scroll-animate">Since 2016 | Your preferred Homestay in PD</p>
+            <a href="#rooms" class="btn pulse scroll-animate">Selection Of House</a>
         </div>
     </section>
 
@@ -997,7 +1010,7 @@
             </div>
             <div class="room-grid">
                 <!-- Room 1 -->
-                <div class="room-card glow-on-hover">
+                <div class="room-card">
                     <div class="room-img">
                         <img src="https://yion05.github.io/my-website-project/images/85524f38-ffbf-4d14-af1c-d48e0dcc3294.avif" alt="PD Leisure Homestay">
                     </div>
@@ -1014,7 +1027,7 @@
                 </div>
 
                 <!-- Room 2 -->
-                <div class="room-card glow-on-hover">
+                <div class="room-card">
                     <div class="room-img">
                         <img src="https://yion05.github.io/my-website-project/images/IMG-20250629-WA0052.jpg" alt="PD Leisure Tmn NLFCS">
                     </div>
@@ -1031,7 +1044,7 @@
                 </div>
 
                 <!-- Room 3 -->
-                <div class="room-card glow-on-hover">
+                <div class="room-card">
                     <div class="room-img">
                         <img src="https://yion05.github.io/my-website-project/images/IMG-20250629-WA0078.jpg" alt="No name">
                     </div>
@@ -1058,12 +1071,11 @@
                 <button class="close-modal">&times;</button>
             </div>
             <div class="modal-body">
-                <!-- Image Slider for Room Gallery -->
                 <div class="image-slider">
                     <img id="modal-img" class="slider-image" src="" alt="Room Image">
                     <button class="slider-nav-btn prev-btn" id="prev-img-btn"><i class="fas fa-chevron-left"></i></button>
                     <button class="slider-nav-btn next-btn" id="next-img-btn"><i class="fas fa-chevron-right"></i></button>
-                    <div class="caption-text" id="slider-caption"></div> <!-- Caption for slider image -->
+                    <div class="caption-text" id="slider-caption"></div>
                 </div>
                 <div class="modal-details">
                     <h4>Room Details And Address</h4>
@@ -1096,7 +1108,6 @@
                             <span>Free Parking</span>
                         </div>
                     </div>
-                    <!-- NEW: Google Maps Button -->
                     <a id="modal-map-link" href="#" target="_blank" rel="noopener noreferrer" class="btn map-btn">
                         <i class="fas fa-map-marked-alt"></i> View on Map
                     </a>
@@ -1105,7 +1116,7 @@
         </div>
     </div>
 
-    <!-- Image Zoom Modal (for clicking on slider images) -->
+    <!-- Image Zoom Modal -->
     <div id="image-zoom-modal" class="image-zoom-modal">
         <span class="close-image-zoom-modal">&times;</span>
         <img class="image-zoom-modal-content" id="expanded-zoom-img">
@@ -1123,65 +1134,42 @@
             </div>
             <div class="amenities-grid">
                 <div class="amenity-item">
-                    <div class="amenity-icon">
-                        <i class="fas fa-wifi"></i>
-                    </div>
+                    <div class="amenity-icon"><i class="fas fa-wifi"></i></div>
                     <h4>High-Speed WiFi</h4>
                     <p>Stay connected with our complimentary high-speed internet access.</p>
                 </div>
-
                 <div class="amenity-item">
-                    <div class="amenity-icon">
-                        <i class="fas fa-utensils"></i>
-                    </div>
+                    <div class="amenity-icon"><i class="fas fa-utensils"></i></div>
                     <h4>Cooking Facility</h4>
                     <p>A fully equipped kitchen is available for your culinary needs.</p>
                 </div>
-
                 <div class="amenity-item">
-                    <div class="amenity-icon">
-                        <i class="fas fa-tshirt"></i>
-                    </div>
+                    <div class="amenity-icon"><i class="fas fa-tshirt"></i></div>
                     <h4>Washing Machine</h4>
                     <p>Convenient laundry facilities to keep you fresh during your stay.</p>
                 </div>
-
                 <div class="amenity-item">
-                    <div class="amenity-icon">
-                        <i class="fas fa-snowflake"></i>
-                    </div>
+                    <div class="amenity-icon"><i class="fas fa-snowflake"></i></div>
                     <h4>Full Aircond</h4>
                     <p>Enjoy a cool and comfortable environment with full air conditioning.</p>
                 </div>
-
                 <div class="amenity-item">
-                    <div class="amenity-icon">
-                        <i class="fas fa-parking"></i>
-                    </div>
+                    <div class="amenity-icon"><i class="fas fa-parking"></i></div>
                     <h4>Free Parking</h4>
                     <p>Ample and secure parking space is available for all our guests, free of charge.</p>
                 </div>
-
                 <div class="amenity-item">
-                    <div class="amenity-icon">
-                        <i class="fas fa-tv"></i>
-                    </div>
+                    <div class="amenity-icon"><i class="fas fa-tv"></i></div>
                     <h4>Smart TV</h4>
                     <p>Entertainment at your fingertips with a modern Smart TV in every unit.</p>
                 </div>
-
                 <div class="amenity-item">
-                    <div class="amenity-icon">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
+                    <div class="amenity-icon"><i class="fas fa-gamepad"></i></div>
                     <h4>Mini Games for Kids</h4>
                     <p>Fun and engaging games available to keep the little ones entertained.</p>
                 </div>
-
                 <div class="amenity-item">
-                    <div class="amenity-icon">
-                        <i class="fas fa-hotdog"></i>
-                    </div>
+                    <div class="amenity-icon"><i class="fas fa-hotdog"></i></div>
                     <h4>Free Barbecue Facilities</h4>
                     <p>We provide all the necessary equipment for a perfect barbecue party.</p>
                 </div>
@@ -1189,7 +1177,7 @@
         </div>
     </section>
 
-    <!-- About Us Section (formerly Contact Section) -->
+    <!-- About Us Section -->
     <section id="about" class="about-us-section">
         <div class="container">
             <div class="section-title">
@@ -1203,7 +1191,6 @@
                     <p>Welcome to PD Leisure Homestay, your ultimate home away from home nestled in the beautiful coastal town of Port Dickson. We are passionately dedicated to creating a serene and comfortable retreat perfect for families, couples and solo adventurers alike who are seeking a truly memorable beachfront experience. Our accommodations are thoughtfully designed with your relaxation in mind, offering the perfect fusion of modern amenities and a cozy, inviting atmosphere, ensuring your stay is nothing short of exceptional. Whether you are looking for a peaceful escape or an adventure-filled vacation, PD Leisure Homestay is the ideal choice. On-site, guests can enjoy a friendly game of darts, or venture out to explore the scenic surroundings by cycling. We eagerly look forward to welcoming you and making your visit to Port Dickson a truly unforgettable experience.</p>
                 </div>
                 <script src="effects.js"></script>
-
                 <div class="about-info-container">
                     <h3>Quick Facts</h3>
                     <div class="about-info-item">
@@ -1235,15 +1222,19 @@
 
     <!-- Footer -->
     <footer>
-
         <div class="container">
             <p>PD Leisure Homestay</p>
         </div>
     </footer>
 
+    <!-- NEW: Back to Top Button -->
+    <a href="#" id="back-to-top" class="back-to-top-btn" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
     <script>
-        // Modal Interaction and Image Slider
         document.addEventListener('DOMContentLoaded', function() {
+            // --- MODAL & SLIDER LOGIC (Existing) ---
             const roomModal = document.getElementById('room-modal');
             const viewButtons = document.querySelectorAll('.view-details');
             const closeRoomModal = document.querySelector('.close-modal');
@@ -1253,125 +1244,92 @@
             const sliderCaption = document.getElementById('slider-caption');
             const modalMapLink = document.getElementById('modal-map-link');
 
-            // Image Zoom Modal Elements
             const imageZoomModal = document.getElementById('image-zoom-modal');
             const expandedZoomImg = document.getElementById('expanded-zoom-img');
             const zoomImgCaption = document.getElementById('zoom-img-caption');
             const closeImageZoomModal = document.querySelector('.close-image-zoom-modal');
-            const zoomPrevBtn = document.getElementById('zoom-prev-btn'); // New: Zoom modal prev button
-            const zoomNextBtn = document.getElementById('zoom-next-btn'); // New: Zoom modal next button
+            const zoomPrevBtn = document.getElementById('zoom-prev-btn');
+            const zoomNextBtn = document.getElementById('zoom-next-btn');
 
-            let currentGalleryImages = []; // Stores images for the current room's slider
-            let currentImageIndex = 0; // Current index for the room's slider
+            let currentGalleryImages = [];
+            let currentImageIndex = 0;
+            let currentZoomImages = [];
+            let currentZoomIndex = 0;
 
-            let currentZoomImages = []; // Stores images for the zoom modal's slider
-            let currentZoomIndex = 0; // Current index for the zoom modal's slider
-
-            // Sidebar elements
+            // --- SIDEBAR LOGIC (Existing) ---
             const sidebarMenu = document.getElementById('sidebar-menu');
             const sidebarCloseBtn = document.querySelector('.sidebar-close-btn');
             const logoTrigger = document.getElementById('logo-trigger');
             const overlay = document.getElementById('overlay');
 
-            // Function to open the sidebar
             function openSidebar() {
                 sidebarMenu.classList.add('open');
                 overlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+                document.body.style.overflow = 'hidden';
             }
 
-            // Function to close the sidebar
             function closeSidebar() {
                 sidebarMenu.classList.remove('open');
                 overlay.classList.remove('active');
-                document.body.style.overflow = 'auto'; // Re-enable scrolling
+                document.body.style.overflow = 'auto';
             }
 
-            // Event listeners for sidebar
             logoTrigger.addEventListener('mouseenter', openSidebar);
-            sidebarMenu.addEventListener('mouseleave', closeSidebar); // Close when mouse leaves sidebar
+            sidebarMenu.addEventListener('mouseleave', closeSidebar);
             sidebarCloseBtn.addEventListener('click', closeSidebar);
-            overlay.addEventListener('click', closeSidebar); // Close when clicking overlay
+            overlay.addEventListener('click', closeSidebar);
+            sidebarMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeSidebar));
 
-            // Also close sidebar if a navigation link is clicked
-            const sidebarLinks = sidebarMenu.querySelectorAll('a');
-            sidebarLinks.forEach(link => {
-                link.addEventListener('click', closeSidebar);
-            });
-
-            // Function to update the displayed image and caption in the room details slider
+            // --- IMAGE SLIDER & ZOOM LOGIC (Existing) ---
             function updateSliderImage() {
                 if (currentGalleryImages.length > 0) {
                     modalImg.src = currentGalleryImages[currentImageIndex].src;
                     sliderCaption.textContent = currentGalleryImages[currentImageIndex].caption;
-                } else {
-                    modalImg.src = ''; // Fallback if no images
-                    sliderCaption.textContent = '';
                 }
             }
-
-            // Event listener for previous button in room details slider
-            prevImgBtn.addEventListener('click', function() {
+            prevImgBtn.addEventListener('click', () => {
                 currentImageIndex = (currentImageIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
                 updateSliderImage();
             });
-
-            // Event listener for next button in room details slider
-            nextImgBtn.addEventListener('click', function() {
+            nextImgBtn.addEventListener('click', () => {
                 currentImageIndex = (currentImageIndex + 1) % currentGalleryImages.length;
                 updateSliderImage();
             });
 
-            // Function to update the displayed image and caption in the zoom modal
             function updateZoomImage() {
                 if (currentZoomImages.length > 0) {
                     expandedZoomImg.src = currentZoomImages[currentZoomIndex].src;
                     zoomImgCaption.textContent = currentZoomImages[currentZoomIndex].caption;
-                } else {
-                    expandedZoomImg.src = '';
-                    zoomImgCaption.textContent = '';
                 }
             }
-
-            // Event listener for previous button in zoom modal
-            zoomPrevBtn.addEventListener('click', function() {
+            zoomPrevBtn.addEventListener('click', () => {
                 currentZoomIndex = (currentZoomIndex - 1 + currentZoomImages.length) % currentZoomImages.length;
                 updateZoomImage();
             });
-
-            // Event listener for next button in zoom modal
-            zoomNextBtn.addEventListener('click', function() {
+            zoomNextBtn.addEventListener('click', () => {
                 currentZoomIndex = (currentZoomIndex + 1) % currentZoomImages.length;
                 updateZoomImage();
             });
 
-            // Event listener for clicking the slider image to zoom
-            modalImg.addEventListener('click', function() {
-                // When opening the zoom modal, synchronize its state with the room details slider
+            modalImg.addEventListener('click', () => {
                 currentZoomImages = currentGalleryImages;
-                currentZoomIndex = currentImageIndex; // Start zoom from the currently displayed image in the slider
-                updateZoomImage(); // Display the image in the zoom modal
-
+                currentZoomIndex = currentImageIndex;
+                updateZoomImage();
                 imageZoomModal.style.display = 'block';
-                document.body.style.overflow = 'hidden'; // Prevent scrolling when zoomed
+                document.body.style.overflow = 'hidden';
             });
-
-            // Close Image Zoom Modal
-            closeImageZoomModal.addEventListener('click', function() {
+            closeImageZoomModal.addEventListener('click', () => {
                 imageZoomModal.style.display = 'none';
-                document.body.style.overflow = 'auto'; // Re-enable scrolling
+                document.body.style.overflow = 'auto';
             });
-
-            // Close Image Zoom Modal when clicking outside content
-            imageZoomModal.addEventListener('click', function(e) {
+            imageZoomModal.addEventListener('click', (e) => {
                 if (e.target === imageZoomModal) {
                     imageZoomModal.style.display = 'none';
                     document.body.style.overflow = 'auto';
                 }
             });
 
-            // --- FIXED BUG & ADDED MAP LINKS ---
-            // Room details data with image galleries, captions, and Google Map links
+            // --- ROOM DATA (Existing) ---
             const roomDetails = {
                 1: {
                     title: 'Leisure homestay',
@@ -1463,40 +1421,64 @@
                 }
             };
 
-            // Open room details modal
+            // MODAL OPEN/CLOSE LOGIC (Existing)
             viewButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const roomId = this.getAttribute('data-room');
                     const room = roomDetails[roomId];
-
                     document.getElementById('modal-title').textContent = room.title;
                     document.getElementById('modal-description').textContent = room.description;
-                    
-                    // Set the href for the map link
                     modalMapLink.href = room.mapLink;
-
-                    // Set current gallery images and reset index for the room details slider
                     currentGalleryImages = room.gallery;
                     currentImageIndex = 0;
-                    updateSliderImage(); // Display the first image and its caption
-
+                    updateSliderImage();
                     roomModal.style.display = 'block';
                     document.body.style.overflow = 'hidden';
                 });
             });
-
-            // Close room details modal
-            closeRoomModal.addEventListener('click', function() {
+            closeRoomModal.addEventListener('click', () => {
                 roomModal.style.display = 'none';
                 document.body.style.overflow = 'auto';
             });
-
-            // Close room details modal when clicking outside
-            window.addEventListener('click', function(event) {
+            window.addEventListener('click', (event) => {
                 if (event.target === roomModal) {
                     roomModal.style.display = 'none';
                     document.body.style.overflow = 'auto';
                 }
+            });
+
+            // --- NEW: Back to Top Button Logic ---
+            const backToTopButton = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+            backToTopButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // --- NEW: Intersection Observer for Scroll Animations ---
+            const animatedElements = document.querySelectorAll('.scroll-animate, .section-title, .room-card, .amenity-item, .about-us-content > div');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Stop observing once visible
+                    }
+                });
+            }, {
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+
+            animatedElements.forEach(element => {
+                // Add the base class for animation readiness
+                element.classList.add('scroll-animate');
+                observer.observe(element);
             });
         });
     </script>
