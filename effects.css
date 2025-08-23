@@ -1,11 +1,10 @@
-/* Bubbles background effect - 已修改层级 */
 .bubbles-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 9998; /* 已从-1改为9998 */
+    z-index: 9998;
     overflow: hidden;
     pointer-events: none;
 }
@@ -18,7 +17,7 @@
     border-radius: 50%;
     animation: float 15s infinite ease-in;
     opacity: 0.5;
-    z-index: 9999; /* 新增这行 */
+    z-index: 9999;
 }
 
 @keyframes float {
@@ -32,7 +31,6 @@
     }
 }
 
-/* Bubble effect for buttons */
 .btn-bubble {
     position: relative;
     overflow: hidden;
@@ -56,7 +54,6 @@
     width: 300px;
     height: 300px;
 }
-/* General Styles */
         * {
             margin: 0;
             padding: 0;
@@ -74,16 +71,15 @@
         }
         
         body {
-            background-color: var(--light); /* Keep a base color */
+            background-color: var(--light);
             color: var(--dark);
             line-height: 1.6;
             font-family: 'Poppins', sans-serif;
-            overflow-x: hidden; /* Prevent horizontal scroll when sidebar is off-screen */
-            /* Background properties will be set by JS */
+            overflow-x: hidden;
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            transition: background-image 2s ease-in-out; /* Smooth transition for background image */
+            transition: background-image 2s ease-in-out;
         }
         
         h1, h2, h3, h4 {
@@ -118,8 +114,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            cursor: pointer; /* Indicate clickable for sidebar */
-            z-index: 1001; /* Ensure logo is above sidebar when it's closed */
+            cursor: pointer;
+            z-index: 1001;
         }
         
         .logo-img {
@@ -169,30 +165,29 @@
             width: 100%;
         }
 
-        /* Sidebar Menu Styles */
         .sidebar-menu {
             position: fixed;
             top: 0;
-            left: -250px; /* Hidden by default */
+            left: -250px;
             width: 250px;
             height: 100%;
             background-color: var(--primary);
             box-shadow: 2px 0 10px rgba(0,0,0,0.3);
             transition: left 0.3s ease-in-out;
-            z-index: 1000; /* Below header, above content */
-            padding-top: 60px; /* Space for close button */
+            z-index: 1000;
+            padding-top: 60px;
             color: white;
         }
 
         .sidebar-menu.open {
-            left: 0; /* Slide in */
+            left: 0;
         }
 
         .sidebar-menu ul {
             list-style: none;
             padding: 0;
-            display: block; /* Override flex */
-            flex-direction: column; /* Stack items vertically */
+            display: block;
+            flex-direction: column;
         }
 
         .sidebar-menu ul li {
@@ -234,7 +229,6 @@
             transform: rotate(90deg);
         }
 
-        /* Overlay for when sidebar is open */
         .overlay {
             display: none;
             position: fixed;
@@ -243,16 +237,14 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0,0,0,0.5);
-            z-index: 999; /* Below sidebar, above content */
+            z-index: 999;
         }
 
         .overlay.active {
             display: block;
         }
         
-        /* Hero Section */
         .hero {
-            /* Background will be set by JS dynamically */
             background-size: cover;
             background-position: center;
             height: 90vh;
@@ -261,7 +253,7 @@
             text-align: center;
             color: white;
             margin-bottom: 60px;
-            transition: background-image 2s ease-in-out; /* Smooth transition for background image */
+            transition: background-image 2s ease-in-out;
         }
         
         .hero-content {
@@ -493,11 +485,10 @@
             gap: 40px;
         }
         
-        /* Image Slider/Carousel in Modal */
         .image-slider {
             position: relative;
             width: 100%;
-            height: 350px; /* Fixed height for consistency */
+            height: 350px;
             overflow: hidden;
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
@@ -582,16 +573,14 @@
             text-align: center;
         }
 
-       /* Amenities Section */
        .amenities {
            padding: 100px 0;
-           /* Added linear-gradient overlay for better text contrast */
            background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
-                      url('https://images.unsplash.com/photo-1520457159981-d1010f39849b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'); /* Beach photo for amenities */
+                      url('https://images.unsplash.com/photo-1520457159981-d1010f39849b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
            background-size: cover;
            background-position: center;
            background-attachment: fixed;
-           color: var(--dark); /* Keep text dark for contrast on potentially lighter image */
+           color: var(--dark);
        }
         
         .amenities-grid {
@@ -766,7 +755,6 @@
             font-size: 0.9rem;
         }
         
-        /* Animations */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -778,7 +766,6 @@
             }
         }
         
-        /* Responsive Design */
         @media (max-width: 992px) {
             .modal-body {
                 grid-template-columns: 1fr;
@@ -788,7 +775,6 @@
                 height: 300px;
             }
 
-            /* Hide regular nav on smaller screens */
             header nav {
                 display: none;
             }
@@ -860,12 +846,10 @@
             }
         }
 
-        /* Image Modal Styles (from effects.css, adapted for this context) */
-        /* This modal will open on top of the room details modal */
         .image-zoom-modal {
             display: none;
             position: fixed;
-            z-index: 3000; /* Higher than room-modal */
+            z-index: 3000;
             left: 0;
             top: 0;
             width: 100%;
@@ -880,7 +864,7 @@
             display: block;
             width: 80%;
             max-width: 800px;
-            margin-top: 50px; /* Adjust as needed */
+            margin-top: 50px;
         }
 
         .close-image-zoom-modal {
@@ -900,7 +884,7 @@
             cursor: pointer;
         }
 
-        .caption-text-zoom { /* New class for zoom modal caption */
+        .caption-text-zoom {
             margin: auto;
             display: block;
             width: 80%;
@@ -916,7 +900,7 @@
             to {transform: scale(1)}
         }
 
-        /* Itinerary Modal Styles */
+
         .itinerary-modal {
             display: none;
             position: fixed;
@@ -1007,5 +991,6 @@
             margin-top: 20px;
             font-size: 1.1rem;
             color: var(--primary);
-            display: none; /* Hidden by default */
+            display: none;
         }
+
