@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="effects.css">
     <style>
-        /* General Styles */
         * {
             margin: 0;
             padding: 0;
@@ -33,20 +32,15 @@
             color: var(--dark);
             line-height: 1.6;
             font-family: 'Poppins', sans-serif;
-            overflow-x: hidden; /* Prevent horizontal scroll when sidebar is off-screen */
-            /* Enhanced Dynamic wave background */
+            overflow-x: hidden;
             background:
-                /* Top wave layer - faster, lighter */
                 url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 100" xmlns="http://www.w3.org/2000/svg" opacity="0.15"><path fill="%23a0d9e7" d="M0,70 C150,40 300,90 450,70 C600,50 750,40 900,60 C1050,80 1200,60 1200,60 L1200,100 L0,100 Z"></path></svg>') bottom -20px left 0 / 1200px 100px repeat-x,
-                /* Middle wave layer - medium speed, primary color */
                 url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 100" xmlns="http://www.w3.org/2000/svg" opacity="0.1"><path fill="%232a6b7a" d="M0,80 C150,50 300,100 450,80 C600,60 750,50 900,70 C1050,90 1200,70 1200,70 L1200,100 L0,100 Z"></path></svg>') bottom -10px left 0 / 1000px 100px repeat-x,
-                /* Ocean gradient - deeper blue */
                 linear-gradient(to bottom,
-                    rgba(173, 216, 230, 0.7) 0%, /* Lighter blue */
-                    rgba(70, 130, 180, 0.5) 100%), /* Steel blue */
-                /* Subtle sand texture */
+                    rgba(173, 216, 230, 0.7) 0%,
+                    rgba(70, 130, 180, 0.5) 100%),
                 url('https://www.transparenttextures.com/patterns/beige-paper.png');
-            animation: waveFlow1 15s linear infinite, waveFlow2 25s linear infinite; /* Two animations for two wave layers */
+            animation: waveFlow1 15s linear infinite, waveFlow2 25s linear infinite;
             background-attachment: fixed;
         }
 
@@ -57,13 +51,12 @@
 
         @keyframes waveFlow2 {
             from { background-position-x: 0, 0, 0, 0; }
-            to { background-position-x: 0, 1000px, 0, 0; } /* Only second layer animates horizontally */
+            to { background-position-x: 0, 1000px, 0, 0; }
         }
 
-        /* Mobile optimization for background */
         @media (max-width: 768px) {
             body {
-                animation-duration: 25s, 35s; /* Slower animations on mobile */
+                animation-duration: 25s, 35s;
                 background-size: 800px 80px, 600px 80px, auto, auto;
             }
         }
@@ -79,7 +72,6 @@
             padding: 0 20px;
         }
 
-        /* Header Styles */
         header {
             background-color: white;
             box-shadow: 0 2px 15px rgba(0,0,0,0.1);
@@ -100,8 +92,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            cursor: pointer; /* Indicate clickable for sidebar */
-            z-index: 1001; /* Ensure logo is above sidebar when it's closed */
+            cursor: pointer;
+            z-index: 1001;
         }
 
         .logo-img {
@@ -151,30 +143,29 @@
             width: 100%;
         }
 
-        /* Sidebar Menu Styles */
         .sidebar-menu {
             position: fixed;
             top: 0;
-            left: -250px; /* Hidden by default */
+            left: -250px;
             width: 250px;
             height: 100%;
             background-color: var(--primary);
             box-shadow: 2px 0 10px rgba(0,0,0,0.3);
             transition: left 0.3s ease-in-out;
-            z-index: 1000; /* Below header, above content */
-            padding-top: 60px; /* Space for close button */
+            z-index: 1000;
+            padding-top: 60px;
             color: white;
         }
 
         .sidebar-menu.open {
-            left: 0; /* Slide in */
+            left: 0;
         }
 
         .sidebar-menu ul {
             list-style: none;
             padding: 0;
-            display: block; /* Override flex */
-            flex-direction: column; /* Stack items vertically */
+            display: block;
+            flex-direction: column;
         }
 
         .sidebar-menu ul li {
@@ -216,7 +207,6 @@
             transform: rotate(90deg);
         }
 
-        /* Overlay for when sidebar is open */
         .overlay {
             display: none;
             position: fixed;
@@ -225,17 +215,16 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0,0,0,0.5);
-            z-index: 999; /* Below sidebar, above content */
+            z-index: 999;
         }
 
         .overlay.active {
             display: block;
         }
 
-        /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'); /* Static background for hero */
+                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
             background-size: cover;
             background-position: center;
             height: 90vh;
@@ -416,7 +405,6 @@
             line-height: 1.7;
         }
 
-        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -486,11 +474,10 @@
             gap: 40px;
         }
 
-        /* Image Slider/Carousel in Modal */
         .image-slider {
             position: relative;
             width: 100%;
-            height: 350px; /* Fixed height for consistency */
+            height: 350px;
             overflow: hidden;
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
@@ -501,7 +488,7 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            cursor: zoom-in; /* Indicate clickable */
+            cursor: zoom-in;
         }
 
         .slider-nav-btn {
@@ -575,7 +562,6 @@
             text-align: center;
         }
 
-        /* Amenities Section */
         .amenities {
             padding: 100px 0;
             background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
@@ -636,7 +622,6 @@
             line-height: 1.7;
         }
 
-        /* About Us Section Styles */
         .about-us-section {
             padding: 80px 0;
             background-color: #e0f7fa;
@@ -840,7 +825,6 @@
             }
         }
 
-        /* Image Modal Styles */
         .image-zoom-modal {
             display: none;
             position: fixed;
@@ -923,7 +907,6 @@
             right: 20px;
         }
 
-        /* NEW: Back to Top Button */
         .back-to-top-btn {
             position: fixed;
             bottom: 30px;
@@ -953,7 +936,7 @@
         }
 
         .back-to-top-btn:hover {
-            background-color: #d35400; /* Darker accent */
+            background-color: #d35400;
             transform: scale(1.1) translateY(-2px);
         }
     </style>
@@ -1421,7 +1404,6 @@
                 }
             };
 
-            // MODAL OPEN/CLOSE LOGIC (Existing)
             viewButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const roomId = this.getAttribute('data-room');
@@ -1447,7 +1429,6 @@
                 }
             });
 
-            // --- NEW: Back to Top Button Logic ---
             const backToTopButton = document.getElementById('back-to-top');
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 300) {
@@ -1461,22 +1442,20 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            // --- NEW: Intersection Observer for Scroll Animations ---
             const animatedElements = document.querySelectorAll('.scroll-animate, .section-title, .room-card, .amenity-item, .about-us-content > div');
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); // Stop observing once visible
+                        observer.unobserve(entry.target);
                     }
                 });
             }, {
-                threshold: 0.1 // Trigger when 10% of the element is visible
+                threshold: 0.1
             });
 
             animatedElements.forEach(element => {
-                // Add the base class for animation readiness
                 element.classList.add('scroll-animate');
                 observer.observe(element);
             });
@@ -1484,3 +1463,4 @@
     </script>
 </body>
 </html>
+
